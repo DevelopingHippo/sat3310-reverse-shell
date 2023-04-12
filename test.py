@@ -5,6 +5,6 @@ import sys
 from winregistry import WinRegistry
 
 username = os.getlogin()
-path = "C:\\Users\\" + username + "\\Documents\\client.py"
+path = "C:\\Users\\" + username + "\\Documents\\client-nc.py"
 
 print(path)

