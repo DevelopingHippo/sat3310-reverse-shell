@@ -2,11 +2,10 @@ import socket
 import sys
 
 host = "0.0.0.0"
-port = sys.argv[1]
+port = int(sys.argv[1])
 buffer_size = 1024 * 256  # 128KB max size of messages, feel free to increase
 # separator string for sending 2 messages in one go
 seperator = "<br>"
-
 
 # Bind the socket to the IP address and listen
 s = socket.socket()
