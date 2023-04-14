@@ -2,7 +2,7 @@ import socket
 import sys
 
 host = "0.0.0.0"
-port = 1234  # sys.argv[1]
+port = sys.argv[1]
 buffer_size = 1024 * 256  # 128KB max size of messages, feel free to increase
 # separator string for sending 2 messages in one go
 seperator = "<br>"

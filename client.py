@@ -1,13 +1,12 @@
 import socket
 import os
 import subprocess
-import sys
 import shutil
 
 
 def main():
-    server_host = "127.0.0.1"  # sys.argv[1]
-    server_port = 1234  # sys.argv[2]
+    server_host = "127.0.0.1" # Change Me
+    server_port = 1234  # Change Me
     buffer_size = 1024 * 256  # 256 KB per message
 
     seperator = "<br>"
