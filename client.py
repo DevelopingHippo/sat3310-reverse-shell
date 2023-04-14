@@ -5,7 +5,7 @@ import shutil
 
 
 def main():
-    server_host = "127.0.0.1" # Change Me
+    server_host = "127.0.0.1"  # Change Me
     server_port = 1234  # Change Me
     buffer_size = 1024 * 256  # 256 KB per message
 
@@ -13,6 +13,7 @@ def main():
 
     # Creating Socket
     s = socket.socket()
+
     # Connecting to server socket
     s.connect((server_host, server_port))
 
